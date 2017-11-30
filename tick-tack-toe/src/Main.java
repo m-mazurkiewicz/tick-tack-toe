@@ -1,26 +1,17 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        Interface interfejs=new Interface();
+        UI consoleUI=new ConsoleUI();
         BackEnd game=new BackEnd();
-        interfejs.enterBoardSize(game);
-        interfejs.printBoard(game);
-        while (true){
-          //  game.move(game,1);
-          //  game.move(game,2);
-            interfejs.insert(game,1);
-            interfejs.printBoard(game);
-            if (game.isWin()){
-                break;
-            }
-            interfejs.insert(game,2);
-            interfejs.printBoard(game);
-            if (game.isWin()){
-                break;
+        consoleUI.enterBoardSize(game);
+        consoleUI.printBoard(game);
+        while (!game.isGameOver()){
+            consoleUI.insertNewMark(game,Mark.CIRCLE);
+            consoleUI.printBoard(game);
+            if (!game.isGameOver()){
+                consoleUI.insertNewMark(game,Mark.CROSS);
+                consoleUI.printBoard(game);
             }
         }
-        //interfejs.insert(game,1);
-
     }
 }
