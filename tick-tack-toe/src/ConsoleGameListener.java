@@ -11,23 +11,19 @@ public class ConsoleGameListener implements GameListener {
 
     @Override
     public void changeDefaultBoardSize() {
+        Scanner input = new Scanner(System.in);
         System.out.println("Domyślna wielkość planszy, to 3 x 3. Jeśli chcesz zmienić jej rozmiar wciśnij T. Jeśli nie - wpisz cokolwiek.");
-        if (new Scanner(System.in).next().equals("T")){
+        if (input.next().equals("T")){
             System.out.println("Podaj nowe wymiary planszy");
-            int x = new Scanner(System.in).nextInt();
-            int y = new Scanner(System.in).nextInt();
+            int x = insertInt();
+            int y = insertInt();
             ticTacToe.createBoard(x,y);
         }
     }
 
     @Override
     public void boardUpdated(Mark[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                System.out.print(board[i][j].getMark() + " ");
-            }
-            System.out.println();
-        }
+        printBoard(board);
     }
 
     @Override
@@ -35,8 +31,8 @@ public class ConsoleGameListener implements GameListener {
         int x;
         int y;
         System.out.println("Gracz " + mark.getMark() + " gdzie chcesz postawić znak?");
-        x = new Scanner(System.in).nextInt() -1;
-        y = new Scanner(System.in).nextInt() -1;
+        x = insertInt() - 1;
+        y = insertInt() - 1;
         ticTacToe.playerMove(x, y);
     }
 
@@ -60,4 +56,21 @@ public class ConsoleGameListener implements GameListener {
         System.out.println(mark + " wygrywa!");
     }
 
+    private void printBoard(Mark[][] board){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                System.out.print(board[i][j].getMark() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private int insertInt(){
+        Scanner inputInt=new Scanner(System.in);
+        while (!inputInt.hasNextInt()){
+            System.out.println("Wprowadź LICZBĘ");
+            inputInt.next();
+        }
+        return inputInt.nextInt();
+    }
 }

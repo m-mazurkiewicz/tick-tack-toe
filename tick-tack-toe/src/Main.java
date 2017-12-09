@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        TicTacToe game = new BackEnd(3, 3);
+        TicTacToe game = new BackEnd();
         game.setGameListener(new ConsoleGameListener(game));
     }
 }
